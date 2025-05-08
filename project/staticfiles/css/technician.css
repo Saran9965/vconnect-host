@@ -1,0 +1,81 @@
+body {
+    background-color: #4b003e;
+    font-family: 'Poppins', sans-serif;
+}
+.profile-header {
+    text-align: center;
+    color: white;
+    padding: 40px 0 20px 0;
+    background-color: #3a0030;
+}
+.breadcrumb {
+    background: transparent;
+    justify-content: center;
+}
+.breadcrumb-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+.profile-container {
+    background-color: #fff;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 1000px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.profile-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.profile-box img {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #6c757d;
+}
+.profile-details {
+    flex: 1;
+}
+.profile-details p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 1.05rem;
+    color: #333;
+}
+.label {
+    font-weight: 600;
+    color: #4b003e;
+    font-size: 1.1rem;
+}
+.icon {
+    color: #6f42c1;
+    margin-right: 8px;
+}
+.no-services {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 40px;
+}
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}

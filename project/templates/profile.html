@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<div class="container my-5">
+    <div class="card profile-card p-4 bg-white">
+        <div class="text-center mb-4">
+            <i class="bi bi-person-circle" style="font-size: 4rem; color: #0d6efd;"></i>
+            <h3 class="mt-2">Welcome, {{ user.username }}!</h3>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="mb-3">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Joined On:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+        </div>
+        
+    </div>
+</div>
+{% endblock content %}

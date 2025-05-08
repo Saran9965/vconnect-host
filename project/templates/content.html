@@ -1,0 +1,47 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block title %}Services{% endblock title%}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/content.css' %}">
+
+<div class="our-services-container container py-5">
+  <h2 class="our-services-title text-center fw-bold mb-4">What We Offer</h2>
+  <p class="service-text mx-auto mb-5" style="max-width: 900px;">
+    Discover reliable home services tailored to your needs. From expert plumbing and electrical solutions to skilled carpentry, we connect you with trusted professionals ready to help—anytime, anywhere.
+  </p>
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="service-card text-center p-3">
+        <img src="{% static 'images/Electrician/e1.jpg' %}" class="service-img img-fluid" alt="Electrician" />
+        <h5 class="service-title mt-3">Electrician</h5>
+        <p>Certified electricians ready to handle wiring, lighting, and all electrical repairs with safety and precision.</p>
+        <a href="{% url 'elect' %}" class="service-btn">Visit Now</a>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="service-card text-center p-3">
+        <img src="{% static 'images/Carpenter/cap3.jpg' %}" class="service-img img-fluid" alt="Carpenter" />
+        <h5 class="service-title mt-3">Carpenter</h5>
+        <p>Skilled carpenters available for furniture repairs, fittings, and custom woodwork solutions.</p>
+        <a href="{% url 'carp' %}" class="service-btn">Visit Now</a>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="service-card text-center p-3">
+        <img src="{% static 'images/Plumber/plu1.jpg' %}" class="service-img img-fluid" alt="Plumber" />
+        <h5 class="service-title mt-3">Plumber</h5>
+        <p>Experienced plumbers to fix leaks, unclog drains, and install or repair water systems efficiently.</p>
+        <a href="{% url 'plum' %}" class="service-btn">Visit Now</a>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="service-card text-center p-3">
+        <img src="{% static 'images/tv/tv2.jpg' %}" class="service-img img-fluid" alt="TV Technician" />
+        <h5 class="service-title mt-3">TV Technician</h5>
+        <p>Expert TV technicians for installations, troubleshooting, and screen or signal issues—fast and reliable.</p>
+        <a href="{% url 'tvtec' %}" class="service-btn">Visit Now</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

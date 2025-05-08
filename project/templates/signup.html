@@ -1,0 +1,161 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '' %}"> 
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="{% url 'signup' %}" class="p-4 shadow-lg bg-white rounded">
+                    {% csrf_token %}
+                    <h3 class="text-center text-primary mb-4">Registration</h3>
+
+                       {% if messages %}
+                        <div class="alert alert-warning">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input type="text" class="form-control" name="address" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Contact No</label>
+                        <input type="tel" class="form-control" name="contactno" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" name="location" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <input type="reset" value="Clear" class="btn btn-danger">
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a href="{% url 'login' %}">Already have an account? Log in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>  -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup & Login</title>
+    <link rel="icon" href="{% static 'images/logo/logo2.png' %}" type="image/png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    {% if messages %}
+    <div class="alert" id="message-box">
+        {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="POST" action="{% url 'signup' %}">
+                <h3>Create Account</h3>
+                {% csrf_token %}
+                <span>or use your email for registration</span>
+                <input type="text" id="name" name="name" placeholder="Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="text" id="address" name="address" placeholder="Address" required>
+                <input type="tel" id="contactno" name="contactno" placeholder="Contact No" required>
+                <input type="text" id="location" name="location" placeholder="Location" required>
+                <span>Already have an account? <a href="{% url 'login' %}">Sign-in</a></span>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form method="POST" action="{% url 'login' %}">
+                <h1>Sign In</h1>
+                {% csrf_token %}
+                <span>or use your Name & password</span>
+                <input type="text" placeholder="Enter name" id="name" name="name" required>
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                <button type="submit">Log In & Connect</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Join VConnect today! Sign up to find skilled professionals near you</p>
+                    <button class="hidden" id="register">Get Started Now</button>
+                </div>
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Log in to connect with trusted service providers in your area.</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#message-box").animate({
+                    opacity: 0,
+                    left: "-=100px"
+                }, 1000, function () {
+                    $(this).hide(1000);
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

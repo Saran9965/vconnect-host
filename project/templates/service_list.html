@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Services.css' %}">
+<div class="container py-5" style="background-color: #f8f9fa;">
+    <h2 class="text-center text-primary fw-bold mb-4">Available Services</h2>
+
+    <div class="row">
+        {% for service in services %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card service-card h-100 shadow-sm border-0">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ service.name }}</h5>
+                    {% if service.get_service_type_display == "Electrician" %}
+                    <span class="badge rounded-pill bg-warning text-dark mb-2 px-3 py-2">Electrician</span>
+                {% elif service.get_service_type_display == "Plumber" %}
+                    <span class="badge rounded-pill bg-info text-dark mb-2 px-3 py-2">Plumber</span>
+                {% elif service.get_service_type_display == "Carpenter" %}
+                    <span class="badge rounded-pill bg-success mb-2 px-3 py-2">Carpenter</span>
+                {% else %}
+                    <span class="badge rounded-pill bg-secondary mb-2 px-3 py-2">{{ service.get_service_type_display }}</span>
+                {% endif %}
+                
+                    <p class="card-text">{{ service.description|truncatewords:20 }}</p>
+                    <hr>
+                    <p><strong>📞 Contact:</strong> {{ service.contact_no }}</p>
+                    <p><strong>📍 Location:</strong> {{ service.address }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">No services found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

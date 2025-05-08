@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plumber Services</title>
+    <link rel="icon" href="{% static 'images/plumber/plumi.png' %}" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e6f0ff, #cce0ff);
+            color: #1e2b3c;
+        }
+        .plumber-section {
+            padding: 10px 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .plumber-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .plumber-image {
+            flex: 1;
+            text-align: center;
+        }
+        .plumber-image img {
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        .plumber-image img:hover {
+            transform: scale(1.03);
+        }
+        .plumber-content {
+            flex: 1;
+        }
+        .plumber-content h2 {
+            color: #005b96;
+            font-size: 2.7rem;
+            margin-bottom: 20px;
+        }
+        .plumber-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .plumber-content ul {
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+        .plumber-content ul li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+        .plumber-content ul li::before {
+            content: '💧 ';
+            margin-right: 6px;
+        }
+        .view-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #005b96;
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .view-btn:hover {
+            background: #003f6b;
+            transform: translateY(-3px) scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .plumber-container {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+            .plumber-content {
+                padding-top: 0;
+                text-align: center;
+            }
+            .plumber-content ul {
+                text-align: left;
+                max-width: 320px;
+                margin: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .plumber-content h2 {
+                font-size: 1.7rem;
+            }
+            .view-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            .plumber-content ul {
+                padding-left: 15px;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .animate {
+            opacity: 0;
+            animation-fill-mode: forwards;
+            animation-duration: 1s;
+        }
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+        .fadeInZoom {
+            animation-name: fadeInZoom;
+        }
+    </style>
+</head>
+<body>
+    <section class="plumber-section">
+        <div class="container plumber-container animate fadeInZoom">
+            <div class="plumber-image">
+                <img src="{% static 'images/Plumber/plu1.jpg' %}" alt="Plumber Service">
+            </div>
+            <div class="plumber-content">
+                <h2 class="animate fadeInUp" style="animation-delay: 0.1s;">Plumber Services</h2>
+                <p class="animate fadeInUp" style="animation-delay: 0.3s;">
+                    Our plumbers are skilled at handling everything from pipe repairs to bathroom fittings. We ensure
+                    leak-free, durable solutions with transparent pricing and fast service.
+                </p>
+                <ul class="animate fadeInUp" style="animation-delay: 0.5s;">
+                    <li>Leak Detection & Pipe Repair</li>
+                    <li>Tap, Sink, and Shower Installation</li>
+                    <li>Bathroom and Toilet Fitting</li>
+                    <li>Water Tank Cleaning & Setup</li>
+                    <li>Clog Removal & Drainage Solutions</li>
+                    <li>Emergency Plumbing Services</li>
+                </ul>
+                <a href="{% url 'plumber' %}" class="view-btn animate fadeInUp" style="animation-delay: 0.7s;">Find a Plumber</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

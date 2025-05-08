@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrician Services</title>
+    <link rel="icon" href="{% static 'images/electrician/eleic.jpg' %}" type="image/png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff9e6, #ffe0b3);
+            color: #2a2a2a;
+        }
+        .electrician-section {
+            padding: 10px 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .electrician-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .electrician-image {
+            flex: 1;
+            text-align: center;
+        }
+        .electrician-image img {
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        .electrician-image img:hover {
+            transform: scale(1.03);
+        }
+        .electrician-content {
+            flex: 1;
+            margin-bottom:50px;
+        }
+        .electrician-content h2 {
+            color: #e67e22;
+            font-size: 2.7rem;
+            margin-bottom: 20px;
+        }
+        .electrician-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .electrician-content ul {
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+        .electrician-content ul li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+        .electrician-content ul li::before {
+            content: '⚡ ';
+            margin-right: 6px;
+        }
+        .view-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #e67e22;
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .view-btn:hover {
+            background: #b55c11;
+            transform: translateY(-3px) scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .electrician-container {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+            .electrician-content {
+                padding-top: 0;
+                text-align: center;
+            }
+            .electrician-content ul {
+                text-align: left;
+                max-width: 320px;
+                margin: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .electrician-content h2 {
+                font-size: 1.7rem;
+            }
+            .view-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            .electrician-content ul {
+                padding-left: 15px;
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInZoom {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .animate {
+            opacity: 0;
+            animation-fill-mode: forwards;
+            animation-duration: 1s;
+        }
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+        .fadeInZoom {
+            animation-name: fadeInZoom;
+        }
+    </style>
+</head>
+<body>
+    <section class="electrician-section">
+        <div class="container electrician-container animate fadeInZoom">
+            <div class="electrician-image">
+                <img src="{% static 'images/Electrician/e3.jpg' %}" alt="Electrician Service">
+            </div>
+            <div class="electrician-content">
+                <h2 class="animate fadeInUp" style="animation-delay: 0.1s;">Expert Electrician Services</h2>
+                <p class="animate fadeInUp" style="animation-delay: 0.3s;">
+                    Our certified electricians are here to handle all your electrical needs — from wiring and repairs to
+                    installations and upgrades. We ensure safety, reliability, and compliance with every job.
+                </p>
+                <ul class="animate fadeInUp" style="animation-delay: 0.5s;">
+                    <li>Home Wiring & Rewiring</li>
+                    <li>Fan, Light, and Socket Installation</li>
+                    <li>Power Backup & Inverter Setup</li>
+                    <li>Switchboard Repair</li>
+                    <li>Troubleshooting electrical propblems</li>
+                    <li>Emergency Electrical Repairs</li>
+                </ul>
+                <a href="{% url 'electrician' %}" class="view-btn animate fadeInUp" style="animation-delay: 0.7s;">Find an Electrician</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

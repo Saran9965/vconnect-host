@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to right, #f0f4f8, #d0e2ec);
+    }
+    .form-container {
+        max-width: 600px;
+        margin: 60px auto;
+    }
+    .form-card {
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        padding: 45px;
+        transition: box-shadow 0.3s ease;
+    }
+    .form-card:hover {
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    }
+    .form-title {
+        font-size: 30px;
+        font-weight: 700;
+        color: #00796b; 
+        text-align: center;
+        margin-bottom: 35px;
+        letter-spacing: 0.5px;
+    }
+    .form-label {
+        font-weight: 600;
+        color: #37474f;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .form-control {
+        border-radius: 10px;
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        transition: border 0.3s;
+    }
+    .form-control:focus {
+        border-color: #00796b;
+        box-shadow: 0 0 0 0.15rem rgba(0, 121, 107, 0.25);
+        outline: none;
+    }
+    .btn-primary {
+        width: 100%;
+        background-color: #00796b;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        color: #fff;
+    }
+    .btn-primary:hover {
+        background-color: #004d40;
+    }
+    .text-danger {
+        font-size: 0.875rem;
+        color: #c62828;
+    }
+    .alert {
+        font-size: 0.95rem;
+    }
+</style>
+
+<div class="container form-container">
+    <div class="form-card">
+        <h2 class="form-title">Add a New Service</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Add Service</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".form-card input, .form-card textarea, .form-card select").forEach(field => {
+            field.classList.add("form-control");
+        });
+    });
+</script>
+{% endblock %}
