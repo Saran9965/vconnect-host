@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from decouple import config
 import dj_database_url
+import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -69,13 +70,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-import dj_database_url
+
+# import dj_database_url
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+# }
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': dj_database_url.parse('postgresql://vconnect_user:f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC@dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com/vconnect')  
 }
-DATABASES['default']=dj_database_url.parse("postgresql://vconnect_user:f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC@dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com/vconnect")
+
+
+
 
 
 # Password validation
