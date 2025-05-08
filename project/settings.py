@@ -71,14 +71,14 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 import dj_database_url
 
+
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://vconnect_user:f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC@dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com/vconnect',
+        default='sqlite:///db.sqlite3',
         conn_max_age=600,
-        ssl_require=True  # Important for Render
+        ssl_require=True
     )
 }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
