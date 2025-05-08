@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']  # Replace with your actual Render URL
+ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com']  # Replace with your actual Render URL
 
 # Static and media files
 STATIC_URL = '/static/'
