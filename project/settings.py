@@ -14,7 +14,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com']  # Replace with your actual Render URL
+ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com','127.0.0.1', 'localhost']  # Replace with your actual Render URL
 
 # Static and media files
 STATIC_URL = '/static/'
@@ -70,18 +70,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
-# import dj_database_url
-# DATABASES = {
-#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-# }
-
-
 DATABASES = {
-    'default': dj_database_url.parse('postgresql://vconnect_user:f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC@dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com/vconnect')  
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'vconnect',
+        'USER': 'vconnect_user',
+        'PASSWORD': 'f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC',
+        'HOST': 'dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com',
+        'PORT': '5432',
+    }
 }
 
+# import os
+# import dj_database_url
+# from dotenv import load_dotenv
 
+# load_dotenv() 
 
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
 
 
 # Password validation
