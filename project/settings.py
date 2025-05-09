@@ -15,12 +15,11 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS = ['https://vconnect-homeservices.onrender.com']
 
-ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com','127.0.0.1', 'localhost']  # Replace with your actual Render URL
-
+ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com','127.0.0.1', 'localhost']
 # Static and media files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # python manage.py collectstatic
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -70,6 +69,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+# PostgreSQL for using Hosting
 
 DATABASES = {
     'default': {
@@ -82,23 +82,14 @@ DATABASES = {
     }
 }
 
+# Sqlite is default
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / "db.sqlite3",
 #     }
 # }
-
-# import os
-# import dj_database_url
-# from dotenv import load_dotenv
-
-# load_dotenv() 
-
-# DATABASES = {
-#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-# }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,14 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication redirects
