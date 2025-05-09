@@ -17,7 +17,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-@login_required(login_url='login')
 def signup(request):
     if request.method == 'POST':
         name = request.POST.get('name', '').strip().lower()

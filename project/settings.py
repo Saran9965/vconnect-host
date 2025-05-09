@@ -13,6 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = ['https://vconnect-homeservices.onrender.com']
 
 ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com','127.0.0.1', 'localhost']  # Replace with your actual Render URL
 
