@@ -1,10 +1,51 @@
-{% extends 'base.html' %}
+{% extends 'chatbot.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/Services.css' %}">
-<div class="container py-5" style="background-color: #f8f9fa;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-Services</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/Services.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-3">
+        <div class="container">
+            <h1 class="navbar-brand d-flex align-items-center">
+                <img src="{% static 'images/icon/add4.svg' %}" alt="VConnect Logo" height="30" class="me-3">
+                VConnect
+            </h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5" href="{% url 'homepage' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fs-5" href="{% url 'add_service' %}">Add-Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger ms-lg-3 mt-2 mt-lg-0" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5" style="background-color: #f8f9fa;">
     <h2 class="text-center text-primary fw-bold mb-4">Available Services</h2>
-
     <div class="row">
         {% for service in services %}
         <div class="col-md-6 col-lg-4 mb-4">
@@ -36,4 +77,8 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

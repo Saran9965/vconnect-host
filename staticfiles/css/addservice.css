@@ -1,0 +1,145 @@
+ body {
+     background: linear-gradient(to right, #f0f4f8, #d0e2ec);
+     font-family: 'Poppins', sans-serif;
+ }
+
+ .form-container {
+     max-width: 600px;
+     margin: 60px auto;
+     padding: 0 15px;
+ }
+
+ .form-card {
+     background-color: #ffffff;
+     border-radius: 20px;
+     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+     padding: 45px;
+     transition: box-shadow 0.3s ease;
+ }
+
+ .form-card:hover {
+     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+ }
+
+ .form-title {
+     font-size: 30px;
+     font-weight: 700;
+     color: #00796b;
+     text-align: center;
+     margin-bottom: 35px;
+     letter-spacing: 0.5px;
+ }
+
+ .form-label {
+     font-weight: 600;
+     color: #37474f;
+     margin-bottom: 5px;
+     display: block;
+ }
+
+ .form-control {
+     border-radius: 10px;
+     padding: 10px 14px;
+     border: 1px solid #ccc;
+     font-size: 15px;
+     transition: border 0.3s;
+ }
+
+ .form-control:focus {
+     border-color: #00796b;
+     box-shadow: 0 0 0 0.15rem rgba(0, 121, 107, 0.25);
+     outline: none;
+ }
+
+ .btn-primary {
+     width: 100%;
+     background-color: #00796b;
+     border: none;
+     border-radius: 10px;
+     padding: 12px;
+     font-size: 16px;
+     font-weight: 600;
+     transition: 0.3s;
+     color: #fff;
+ }
+
+ .btn-primary:hover {
+     background-color: #004d40;
+ }
+
+ .text-danger {
+     font-size: 0.875rem;
+
+ }
+
+ .alert {
+     font-size: 1.2rem;
+ }
+
+ .navbar-brand {
+     font-weight: bold;
+     font-size: 1.6rem;
+     color: #00796b !important;
+ }
+
+ @media (max-width: 768px) {
+     .navbar-brand {
+         font-size: 1.2rem;
+     }
+ }
+
+ .auto-hide {
+     transition: opacity 2.5s ease, transform 0.5s ease;
+ }
+
+ .card {
+     border-radius: 12px;
+     overflow: hidden;
+     transition: transform 0.3s ease;
+     min-height: 100%;
+     background-color: #fff;
+ }
+
+ .card:hover {
+     transform: scale(1.03);
+ }
+
+ .card-img-top {
+     height: 220px;
+     object-fit: cover;
+ }
+
+ .card-body {
+     padding: 15px;
+ }
+
+ .card-footer {
+     background-color: #f8f9fa;
+ }
+
+ .form-card {
+     border-radius: 12px;
+     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
+
+ .form-container {
+     margin-top: 50px;
+ }
+
+ .form-title {
+     font-size: 24px;
+     font-weight: 600;
+ }
+
+ .form-label {
+     font-weight: 600;
+ }
+
+ .form-card input,
+ .form-card textarea,
+ .form-card select {
+     width: 100%;
+     border-radius: 8px;
+     padding: 10px;
+     border: 1px solid #ccc;
+ }

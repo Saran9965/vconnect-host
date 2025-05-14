@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+@login_required(login_url='login')
 def signup(request):
     if request.method == 'POST':
         name = request.POST.get('name', '').strip().lower()
@@ -95,7 +96,6 @@ def service_list(request):
     return render(request, 'service_list.html', {'services': services})
 
 @login_required
-@staff_member_required 
 def add_service(request):
     if request.method == 'POST':
         form = ServiceForm(request.POST, request.FILES)
@@ -103,9 +103,35 @@ def add_service(request):
             service = form.save(commit=False)
             service.user = request.user
             service.save()
-            return redirect('service_list')
+            messages.success(request, 'Service added successfully.')
+            return redirect('add_service')
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = ServiceForm()
+    services = Service.objects.filter(user=request.user)
+    return render(request, 'add_service.html', {'form': form, 'services': services})
+
+@login_required
+def delete_service(request, service_id):
+    service = get_object_or_404(Service, id=service_id, user=request.user)
+    service.delete()
+    messages.success(request, 'Service deleted successfully.')
+    return redirect('add_service')
+
+@login_required
+def edit_service(request, service_id):
+    service = get_object_or_404(Service, id=service_id, user=request.user)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, request.FILES, instance=service)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Service updated successfully.')
+            return redirect('add_service')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ServiceForm(instance=service)
     return render(request, 'add_service.html', {'form': form})
 
 def plumber(request):

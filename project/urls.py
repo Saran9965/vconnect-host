@@ -27,6 +27,8 @@ urlpatterns = [
     path('service/<int:service_id>/rate/', views.submit_rating, name='submit_rating'),
     path('service/<int:service_id>/review/', views.submit_review, name='submit_review'),
     path('service/<int:service_id>/reviews/', views.get_reviews, name='get_reviews'),
+    path('edit-service/<int:service_id>/', views.edit_service, name='edit_service'),
+    path('delete-service/<int:service_id>/', views.delete_service, name='delete_service'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

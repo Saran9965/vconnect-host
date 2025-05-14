@@ -21,6 +21,7 @@ class Service(models.Model):
         ('CARPENTER', 'Carpenter'),
         ('TV TECH', 'TV Technician'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
     name = models.CharField(max_length=100)
     service_type = models.CharField(max_length=50, choices=SERVICE_CHOICES)
     description = models.TextField()

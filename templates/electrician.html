@@ -1,4 +1,6 @@
+{% extends 'chatbot.html' %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,5 +174,7 @@
         document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
     });
 </script>
+
 </body>
 </html>
+{% endblock content %}
