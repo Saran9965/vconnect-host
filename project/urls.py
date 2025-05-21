@@ -29,6 +29,7 @@ urlpatterns = [
     path('service/<int:service_id>/reviews/', views.get_reviews, name='get_reviews'),
     path('edit-service/<int:service_id>/', views.edit_service, name='edit_service'),
     path('delete-service/<int:service_id>/', views.delete_service, name='delete_service'),
+    path('profileupdate/', views.update_profile, name='update_profile'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

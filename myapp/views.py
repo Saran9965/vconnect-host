@@ -16,8 +16,8 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .forms import EmpDataForm
 
-@login_required(login_url='login')
 def signup(request):
     if request.method == 'POST':
         name = request.POST.get('name', '').strip().lower()
@@ -72,6 +72,39 @@ def loginpage(request):
 def logoutpage(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def update_profile(request):
+    try:
+        profile = empdata.objects.get(email=request.user.email)
+    except empdata.DoesNotExist:
+        messages.error(request, 'Profile data not found.')
+        return redirect('profile')
+
+    if request.method == 'POST':
+        form = EmpDataForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')
+    else:
+        form = EmpDataForm(instance=profile)
+    return render(request, 'update_profile.html', {'form': form})
+
+def profile_view(request):
+    emp_profile = None
+    if request.user.is_authenticated:
+        try:
+            emp_profile = empdata.objects.get(user=request.user)
+        except empdata.DoesNotExist:
+            emp_profile = None
+
+    context = {
+        'user': request.user,
+        'emp_profile': emp_profile
+    }
+    return render(request, 'profile.html', context)
+
 
 def frontpage(request):
     return render(request,'frontpage.html')

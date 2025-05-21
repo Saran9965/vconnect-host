@@ -1,5 +1,14 @@
 from django import forms
 from .models import Service, Review
+from .models import empdata
+
+class EmpDataForm(forms.ModelForm):
+    class Meta:
+        model = empdata
+        fields = ['name', 'email', 'password', 'address', 'contact_no', 'location']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
 class ServiceForm(forms.ModelForm):
     class Meta:

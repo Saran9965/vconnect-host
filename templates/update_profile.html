@@ -1,0 +1,86 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block title %}Update Profile{% endblock title %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f5f7fa;
+        font-family: 'Poppins', sans-serif;
+    }
+    .card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        background: #ffffff;
+    }
+    h3 {
+        font-weight: 600;
+        color: #4b003e;
+    }
+    label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        width: 30%;
+        color: #37474f;
+    }
+    input, select, textarea {
+        border-radius: 10px !important;
+        padding: 10px 15px !important;
+        border: 1px solid #ced4da !important;
+        width: 60%;
+    }
+    .btn-primary {
+        background-color: #4b003e;
+        border-color: #4b003e;
+    }
+    .btn-primary:hover {
+        background-color: #630553;
+        border-color: #3a0030;
+    }
+    .btn-outline-primary {
+        color: #4b003e;
+        border-color: #4b003e;
+    }
+    .btn-outline-primary:hover {
+        background-color: #4b003e;
+        color: white;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-8 col-xl-6 col-sm-10">
+            <div class="card p-4">
+              <h3 class="text-center mb-4"><i class="bi bi-person-lines-fill text-dark"></i>  Update Your Profile</h3>
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'update_profile' %}" class="btn btn-outline-primary w-100">Edit Profile</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

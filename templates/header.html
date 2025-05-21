@@ -33,33 +33,29 @@
           <li class="nav-item">
             <a class="nav-link nav-link-red" href="{% url 'profile' %}">Profile</a>
           </li>
-          <!-- {% if user.is_staff %}
+          {% if user.is_staff %}
           <li class="nav-item">
-            <a class="nav-link nav-link-red" href="{% url 'add_service' %}">
-            <i class="bi bi-plus-circle-fill me-1"></i>Add Services</a>
+            <a class="nav-link nav-link-red d-flex flex-column align-items-center" href="/admin">
+            <img src="{% static 'images/icon/admin.png' %}" alt="Logo" style="width: 30px; height: 30px;" class="mt-1"/>
+            <span class="mb-0">Admin</span></a>
           </li>
-          {% endif %} -->
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link nav-link-red" href="{% url 'add_service' %}">
             <i class="bi bi-person-plus-fill"></i>Add Services</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-danger ms-lg-3 mt-2 mt-lg-0" href="{% url 'logout' %}">Logout</a>
+            <a class="btn btn-danger ms-lg-3 mt-lg-0 mb-2" href="{% url 'logout' %}">Logout</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
   <button id="chatbot-toggle" class="btn btn-primary rounded-circle" onclick="toggleChat()">💬</button>
   <div id="chat-container" class="shadow">
     <div id="chat-box"></div>
-    <div class="input-group mt-2">
-      <input type="text" id="user-input" class="form-control" placeholder="Type your message...">
-      <button class="btn btn-success" onclick="sendMessage()">Send</button>
-    </div>
+    <iframe allow="microphone;"width="280"height="550"src="https://console.dialogflow.com/api-client/demo/embedded/85dff238-718e-4062-a624-da3763c5440d"></iframe>
   </div>
-  
   <script>
     function toggleChat() {
       const chat = document.getElementById("chat-container");
@@ -67,19 +63,6 @@
         chat.style.display = "none";
       } else {
         chat.style.display = "flex";
-      }
-    }
-    function sendMessage() {
-      const input = document.getElementById("user-input");
-      const msg = input.value.trim();
-      if (msg) {
-        const chatBox = document.getElementById("chat-box");
-        chatBox.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
-        input.value = "";
-        setTimeout(() => {
-          chatBox.innerHTML += `<div><strong>Bot:</strong> Sorry, I’m just a demo chatbot.</div>`;
-          chatBox.scrollTop = chatBox.scrollHeight;
-        }, 500);
       }
     }
   </script>

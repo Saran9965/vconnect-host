@@ -36,3 +36,8 @@ body {
     font-size: 4rem;
     color: #0d6efd;
 }
+.slide-fade-left {
+    opacity: 0;
+    transform: translateX(-300px);
+    transition: all 2s ease;
+}
