@@ -13,7 +13,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['https://vconnect-homeservices.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://vconnect-homeservices.onrender.com','http://52.55.71.119:8000/']
 
 ALLOWED_HOSTS = ['vconnect-homeservices.onrender.com','127.0.0.1', 'localhost']
 # Static and media files
@@ -69,18 +69,33 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# PostgreSQL for using Hosting
+# PostgreSQL for using Hosting in render
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'vconnect',
+#         'USER': 'vconnect_user',
+#         'PASSWORD': 'f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC',
+#         'HOST': 'dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com',
+#         'PORT': '5432',
+#     }
+# }
+
+
+# AWS Database
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vconnect',
-        'USER': 'vconnect_user',
-        'PASSWORD': 'f2qehAKwRNeVsOXnFfFpDtv2Lis6ExcC',
-        'HOST': 'dpg-d04ulfmuk2gs73e2lbd0-a.singapore-postgres.render.com',
+        'NAME': 'vconnectaws',
+        'USER': 'saran',
+        'PASSWORD': 'Saran996599',
+        'HOST': 'vconnect-aws.c2d0wc2s2b49.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
+
 
 # Sqlite is default
 

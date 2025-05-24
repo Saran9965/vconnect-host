@@ -17,6 +17,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from .forms import EmpDataForm
+from django.db.models import Avg
 
 def signup(request):
     if request.method == 'POST':
@@ -80,7 +81,6 @@ def update_profile(request):
     except empdata.DoesNotExist:
         messages.error(request, 'Profile data not found.')
         return redirect('profile')
-
     if request.method == 'POST':
         form = EmpDataForm(request.POST, instance=profile)
         if form.is_valid():
@@ -98,13 +98,11 @@ def profile_view(request):
             emp_profile = empdata.objects.get(user=request.user)
         except empdata.DoesNotExist:
             emp_profile = None
-
     context = {
         'user': request.user,
         'emp_profile': emp_profile
     }
     return render(request, 'profile.html', context)
-
 
 def frontpage(request):
     return render(request,'frontpage.html')
@@ -169,83 +167,102 @@ def edit_service(request, service_id):
 
 def plumber(request):
     selected_location = request.GET.get('location', '')
+    min_rating = request.GET.get('rating', '')
     services = Service.objects.filter(service_type='PLUMBER')
     if selected_location:
         services = services.filter(address__icontains=selected_location)
     for service in services:
         service.review = Review.objects.filter(service=service)
-        service.average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
+        service.average_rating = service.review.aggregate(Avg('rating'))['rating__avg'] or 0
+    if min_rating:
+        try:
+            min_rating = float(min_rating)
+            services = [s for s in services if s.average_rating >= min_rating]
+        except ValueError:
+            pass
+
     locations = Service.objects.filter(service_type='PLUMBER') \
                                .values_list('address', flat=True).distinct()
     return render(request, 'plumber.html', {
         'services': services,
         'locations': locations,
+        'rating': min_rating,
+        'selected_location': selected_location,
     })
 
 def carpenter(request):
     selected_location = request.GET.get('location', '')
+    min_rating = request.GET.get('rating', '')
     services = Service.objects.filter(service_type='CARPENTER')
     if selected_location:
         services = services.filter(address__icontains=selected_location)
     for service in services:
         service.review = Review.objects.filter(service=service)
-        service.average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
+        service.average_rating = service.review.aggregate(Avg('rating'))['rating__avg'] or 0
+    if min_rating:
+        try:
+            min_rating = float(min_rating)
+            services = [s for s in services if s.average_rating >= min_rating]
+        except ValueError:
+            pass
+
     locations = Service.objects.filter(service_type='CARPENTER') \
                                .values_list('address', flat=True).distinct()
     return render(request, 'carpenter.html', {
         'services': services,
         'locations': locations,
+        'rating': min_rating,
+        'selected_location': selected_location,
     })
-
-@login_required
-def submit_review(request, service_id):
-    service = get_object_or_404(Service, id=service_id)
-    if request.method == 'POST':
-        rating = request.POST.get('rating')
-        review_text = request.POST.get('review_text')
-        if not rating or not review_text:
-            return JsonResponse({'error': 'Rating and review are required.'}, status=400)
-        Review.objects.create(
-            service=service,
-            user=request.user,
-            rating=rating,
-            text=review_text
-        )
-        # Update average rating for the service
-        average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
-        service.average_rating = average_rating
-        service.save()
-        return JsonResponse({'message': 'Review submitted successfully!'})
-    return JsonResponse({'error': 'Failed to submit review'}, status=400)
 
 def electrician(request):
     selected_location = request.GET.get('location', '')
+    min_rating = request.GET.get('rating', '')
     services = Service.objects.filter(service_type='ELECTRICIAN')
     if selected_location:
         services = services.filter(address__icontains=selected_location)
     for service in services:
         service.review = Review.objects.filter(service=service)
-        service.average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
+        service.average_rating = service.review.aggregate(Avg('rating'))['rating__avg'] or 0
+    if min_rating:
+        try:
+            min_rating = float(min_rating)
+            services = [s for s in services if s.average_rating >= min_rating]
+        except ValueError:
+            pass
+
     locations = Service.objects.filter(service_type='ELECTRICIAN') \
                                .values_list('address', flat=True).distinct()
     return render(request, 'electrician.html', {
         'services': services,
         'locations': locations,
+        'rating': min_rating,
+        'selected_location': selected_location,
     })
 
 def tvtech(request):
     selected_location = request.GET.get('location', '')
+    min_rating = request.GET.get('rating', '')
     services = Service.objects.filter(service_type='TV TECH')
     if selected_location:
         services = services.filter(address__icontains=selected_location)
     for service in services:
         service.review = Review.objects.filter(service=service)
-        service.average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
+        service.average_rating = service.review.aggregate(Avg('rating'))['rating__avg'] or 0
+    if min_rating:
+        try:
+            min_rating = float(min_rating)
+            services = [s for s in services if s.average_rating >= min_rating]
+        except ValueError:
+            pass
+        
     locations = Service.objects.filter(service_type='TV TECH') \
                                .values_list('address', flat=True).distinct()
     return render(request, 'tvtech.html', {
         'services': services,
         'locations': locations,
+        'rating': min_rating,
+        'selected_location': selected_location,
     })
 
 def plum(request):
@@ -291,6 +308,27 @@ def submit_rating(request, service_id):
         service.save()
         return JsonResponse({'success': True, 'new_avg': service.avg_rating})
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+@login_required
+def submit_review(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+    if request.method == 'POST':
+        rating = request.POST.get('rating')
+        review_text = request.POST.get('review_text')
+        if not rating or not review_text:
+            return JsonResponse({'error': 'Rating and review are required.'}, status=400)
+        Review.objects.create(
+            service=service,
+            user=request.user,
+            rating=rating,
+            text=review_text
+        )
+        # Update average rating for the service
+        average_rating = service.review.aggregate(models.Avg('rating'))['rating__avg']
+        service.average_rating = average_rating
+        service.save()
+        return JsonResponse({'message': 'Review submitted successfully!'})
+    return JsonResponse({'error': 'Failed to submit review'}, status=400)
 
 @login_required
 @csrf_exempt
