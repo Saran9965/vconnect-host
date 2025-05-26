@@ -8,9 +8,16 @@
   <button id="chatbot-toggle" class="btn btn-primary rounded-circle" onclick="toggleChat()">💬</button>
   <div id="chat-container" class="shadow">
     <div id="chat-box"></div>
-     <iframe allow="microphone;"width="280"height="550"src="https://console.dialogflow.com/api-client/demo/embedded/85dff238-718e-4062-a624-da3763c5440d"></iframe>    
+    <!-- <iframe height="430" width="350" src="https://bot.dialogflow.com/85dff238-718e-4062-a624-da3763c5440d"></iframe> -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="VConnect"
+      agent-id="85dff238-718e-4062-a624-da3763c5440d"
+      language-code="en">
+    </df-messenger> 
   </div>
-  
+
   <script>
     function toggleChat() {
       const chat = document.getElementById("chat-container");
