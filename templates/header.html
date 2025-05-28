@@ -51,32 +51,52 @@
       </div>
     </div>
   </nav>
-  <!-- <button id="chatbot-toggle" class="btn btn-primary rounded-circle" onclick="toggleChat()">💬</button>
-  <div id="chat-container" class="shadow">
-    <div id="chat-box"></div> -->
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
-  <!-- incase of chatbot not work use this 7 line only -->
-  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<button id="chatbot-toggle" class="chat-toggle-btn" onclick="toggleChatbot()">
+<img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chat" width="40" height="40" style="vertical-align: middle;" />
+</button>
   <df-messenger
     intent="WELCOME"
     chat-title="VConnect"
     agent-id="85dff238-718e-4062-a624-da3763c5440d"
-    language-code="en">
+    language-code="en"
+    chat-icon="https://cdn-icons-png.flaticon.com/512/4712/4712027.png">
   </df-messenger>
-     
-  
-  <!-- <iframe allow="microphone;"width="280"height="550"src="https://console.dialogflow.com/api-client/demo/embedded/85dff238-718e-4062-a624-da3763c5440d"></iframe> -->
-  <!-- </div>
-  <script>
-    function toggleChat() {
-      const chat = document.getElementById("chat-container");
-      if (chat.style.display === "flex") {
-        chat.style.display = "none";
-      } else {
-        chat.style.display = "flex";
-      }
+
+<style>
+.chat-toggle-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color:  #1154e4;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 10px;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  cursor: pointer;
+}
+df-messenger {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  z-index: 9998;
+}
+</style>
+
+<script>
+  function toggleChatbot() {
+    const bot = document.querySelector("df-messenger");
+    if (bot.style.display === "none" || bot.style.display === "") {
+      bot.style.display = "block";
+    } else {
+      bot.style.display = "none";
     }
-  </script> -->
+  }
+</script>
 
   <section id="home" class="py-5 mt-4 text-center">
     <div class="container">
