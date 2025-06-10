@@ -85,26 +85,26 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # AWS Database
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'vconnectaws',
-        'USER': 'saran',
-        'PASSWORD': 'Saran996599',
-        'HOST': 'vconnect-aws.c2d0wc2s2b49.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'vconnectaws',
+#         'USER': 'saran',
+#         'PASSWORD': 'Saran996599',
+#         'HOST': 'vconnect-aws.c2d0wc2s2b49.us-east-1.rds.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Sqlite is default
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
+    }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
